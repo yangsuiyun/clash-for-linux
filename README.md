@@ -17,11 +17,19 @@ Linux环境安装配置Clash工具，以实现代理上网效果。包含下载�
 - 命令执行过程（仅供参考,请按本地设置稍作调整）
 
 ```bash
-[root@localhost ~]# su
-[root@localhost ~]# mkdir /opt/clash
-[root@localhost ~]# gunzip clash-linux-amd64-v1.18.0.gz
-[root@localhost ~]# mv Desktop/clash-linux-amd64-v1.18.0 /opt/clash/clash
-[root@localhost ~]# cd /opt/clash/
+# 1. 放程序文件
+
+# su
+# mkdir /opt/clash
+# gunzip clash-linux-amd64-v1.18.0.gz
+# mv clash-linux-amd64-v1.18.0 /opt/clash/clash
+# cd /opt/clash/
+
+
+# 2. 放配置文件，可以从已有clashx的配置文件夹里找
+# 目录：/Users/cloud/.config/clash/mianbizhineng.yaml
+# 修改配置中allow-lan: true 则开启其他机器访问该vpn
+
 [root@localhost clash]# wget -O config.yaml [订阅链接]
 --2021-05-01 22:39:37--  [订阅链接]
 Resolving www.sub-speeder.com (www.sub-speeder.com)... 104.21.18.176, 172.67.182.209, 2606:4700:3035::ac43:b6d1, ...
@@ -34,17 +42,13 @@ Saving to: ‘config.yaml’
 
 2021-05-01 22:39:38 (287 KB/s) - ‘config.yaml’ saved [44830/44830]
 
-[root@localhost clash]# wget -O Country.mmdb https://www.sub-speeder.com/client-download/Country.mmdb
---2021-05-01 22:39:55--  https://www.sub-speeder.com/client-download/Country.mmdb
-Resolving www.sub-speeder.com (www.sub-speeder.com)... 172.67.182.209, 104.21.18.176, 2606:4700:3035::ac43:b6d1, ...
-Connecting to www.sub-speeder.com (www.sub-speeder.com)|172.67.182.209|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 3878104 (3.7M) [application/octet-stream]
-Saving to: ‘Country.mmdb’
 
-100%[======================================>] 3,878,104   2.86MB/s   in 1.3s   
 
-2021-05-01 22:39:58 (2.86 MB/s) - ‘Country.mmdb’ saved [3878104/3878104]
+
+# 3.从代码库中下载Country.mmdb 放到clash程序相同目录
+
+
+# 4.启动
 [root@localhost clash]# chmod +x clash 
 [root@localhost clash]# ll
 total 19832
@@ -58,6 +62,12 @@ INFO[0000] Start initial compatible provider AsianTV
 INFO[0000] Start initial compatible provider Others     
 INFO[0000] Start initial compatible provider GlobalTV
 ```
+
+### 四、测试验证
+
+- 通过curl命令访问www.google.com，响应正常。
+- 部分（我的TnT）服务器会出现curl可通，ping不通的情况，求大神告知~
+![image](https://user-images.githubusercontent.com/43178911/116800843-2fe4b200-ab37-11eb-96fd-5a6ad01ac29b.png)
 
 ### 三、启用系统代理
 
@@ -78,11 +88,7 @@ INFO[0000] Start initial compatible provider GlobalTV
 
 ![image](https://user-images.githubusercontent.com/43178911/116800863-599dd900-ab37-11eb-8c86-ceed8bee487b.png)
 
-### 四、测试验证
 
-- 通过curl命令访问www.google.com，响应正常。
-- 部分（我的TnT）服务器会出现curl可通，ping不通的情况，求大神告知~
-![image](https://user-images.githubusercontent.com/43178911/116800843-2fe4b200-ab37-11eb-96fd-5a6ad01ac29b.png)
 
 ### 五、配置开机自启动
 
